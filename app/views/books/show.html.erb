@@ -2,6 +2,12 @@
 
 <%= render @book %>
 
+<p>
+  <%= if @book.image.attached? %>
+    <%= image_tag @book.image %>
+  <% end %>
+</p>
+
 <div>
   <%= link_to "Edit this book", edit_book_path(@book) %> |
   <%= link_to "Back to books", books_path %>
