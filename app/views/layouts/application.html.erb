@@ -2,10 +2,11 @@
 
 <body>
   <% if user_signed_in? %>
-    <p>こんにちは、<%= current_user.email %></p>
-    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+    <%= link_to 'ホーム', new_user_session_path %>
+    <p>こんにちは、<%= link_to current_user.email, users_show_path %></p>
     <br>
   <% else %>
+    <%= link_to 'ホーム', destroy_user_session_path, method: :delete %>
     <%= link_to "サインイン", new_user_session_path %>
     <%= link_to "ユーザー登録", new_user_registration_path %>
     <hr></hr>
