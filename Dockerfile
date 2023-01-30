@@ -1,4 +1,4 @@
-FROM ruby:buster
+FROM ruby:3.1.2-buster  
 
 # chroot to /app in the container.
 WORKDIR /app
@@ -49,6 +49,15 @@ RUN gem install bundler
 
 # Install from Gemfile.
 RUN bundle install
+
+# Install yarn.
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt-get install -y nodejs
+RUN npm install -g yarn
+RUN yarn install --check-files
+
+# Install webpacker.
+RUN rails webpacker:install
 
 # Copy the project files to /app in the container.
 COPY . /app/
