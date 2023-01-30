@@ -3,7 +3,7 @@
 <body>
   <% if user_signed_in? %>
     <%= link_to 'ホーム', new_user_session_path %>
-    <p>こんにちは、<%= link_to current_user.email, users_show_path %></p>
+    <p>こんにちは、<%= link_to current_user.name, users_show_path %></p>
     <br>
   <% else %>
     <%= link_to 'ホーム', destroy_user_session_path, method: :delete %>
