@@ -1,2 +1,6 @@
-<h1>ホームページ</h1>
-<%= link_to "本一覧をみる", books_path %>
+<div class="jumbotron m-5"  >
+  <h1 class="display-4">Book Reviewへようこそ</h1>
+  <hr class="my-4">
+  <p>本についてレビューをするサイトです</p>
+  <%= button_to "本一覧をみる", books_path, method: :get ,class: "btn btn-primary btn-lg" %>
+</div>

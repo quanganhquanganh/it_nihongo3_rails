@@ -1,26 +1,49 @@
-<p style="color: green"><%= notice %></p>
+<p id="notice"><%= notice %></p>
 
-<%= render @book %>
-
-<p>
-  <%= if @book.image.attached? %>
-    <%= image_tag @book.image %>
-  <% end %>
-</p>
-
-<h2>Review List</h2>
-<ul>
-    <% @book.book_review.each do |book_review| %>
-    <li>
-        <%= book_review.review %>
-        (<i><%= book_review.user.name if book_review.user%></i>)
-    </li>
-    <% end %>
-</ul>
-
-<div>
-  <%= link_to "Edit this book", edit_book_path(@book) %> |
-  <%= link_to "Back to books", books_path %>
-
-  <%= button_to "Destroy this book", @book, method: :delete %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card mb-3">
+        <h3 class="card-header">本詳細</h3>
+        <div class="card-body">
+          <h5 class="card-title"><%= @book.title %></h5>
+          <h6 class="card-subtitle text-muted">ページ数：<%= @book.number_of_pages %></h6>
+  　　　　</div>
+  　　　　<% if @book.image.attached? %>
+          <%= image_tag @book.image, class: "card-img" %>
+        <% end %>
+        <div class="card-body">
+          <p class="card-text"><%= @book.detail %></p>
+        </div>
+      </div>
+    </div>
+  <div class="col-sm-4">
+    <div class="card bg-light mb-3" style="max-width: 40rem;">
+      <div class="card-header">レビュー</div>
+      <div class="card-body">
+        <ul>
+          <% @book.book_review.each do |book_review|%>
+          　<div class="card border-light mb-3" style="max-width: 20rem;">
+              <div class="card-header"><%= book_review.user.name %></div>
+              <div class="card-body">
+                <p class="card-text"><%= book_review.review %></p>
+              </div>
+            </div>
+          <% end %>
+        </ul>
+      <%= form_with(model: @book_review, local: true) do |form| %>
+        <div class= "field">
+          <%= form.text_area :review, :class => "form-control" %>
+          <%= form.hidden_field :book_id, :value => @book.id %>
+        </div>
+        <div class="actions">
+          <%= form.submit %>
+        </div>
+       <% end %>
+       </div>
+    </div>
+  </div>
 </div>
+
+<%= link_to 'Edit', edit_book_path(@book) %> |
+<%= link_to 'Back', books_path %>

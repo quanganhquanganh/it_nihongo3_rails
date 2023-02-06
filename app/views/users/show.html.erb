@@ -1,13 +1,10 @@
-<h1>プロファイル</h1>
-<%= if current_user.avatar.attached? %>
-  <%= image_tag current_user.avatar, size: "100x100" %>
-<% end %>
-
-<h3>メールアドレス</h3>
-<%= current_user.email %></p>
-
-<h3>名前</h3>
-<%= current_user.name %></p>
-
-<h3>年齢</h3>
-<%= current_user.age %></p>
+<div class="card col-sm-6 mx-auto mt-5">
+  <% if @user.avatar.attached? %>
+    <%= image_tag @user.avatar, class: "card-img-top" %>
+  <% end %>
+  <div class="card-body">
+    <h5 class="card-title"><%= @user.name %></h5>
+    <h6 class="card-subtitle text-muted"><%= @user.age %>才</h6>
+    <p class="card-text"><%= @user.email %></p>
+  </div>
+</div>

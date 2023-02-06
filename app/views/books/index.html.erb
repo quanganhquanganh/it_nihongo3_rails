@@ -1,14 +1,24 @@
-<p style="color: green"><%= notice %></p>
+<p id="notice"><%= notice %></p>
 
 <h1>Books</h1>
-
-<div id="books">
-  <% @books.each do |book| %>
-    <%= render book %>
-    <p>
-      <%= link_to "Show this book", book %>
-    </p>
+<div class="row">
+　<% @books.each do |book| %>
+　　<div class="col-md-3">
+      <div class="card img-thumbnail">
+        <% if book.image.attached? %>
+          <%= image_tag book.image, class: "card-img" %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= book.title %></h5>
+          <p class="card-text text-muted">ページ数：<%= book.number_of_pages %></p>
+        </div>
+        <div class="card-body">
+          <%= button_to "詳細を見る", book, method: :get, class: "btn btn-outline-secondary btn-sm" =%>
+        </div>
+      </div>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New book", new_book_path %>
+</br>
+<%= button_to "本を追加する", new_book_path, method: :get ,class: "btn btn-primary btn-sm" %> 

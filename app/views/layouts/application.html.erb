@@ -1,17 +1,51 @@
-</head>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ourfirstrails</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<body>
-  <% if user_signed_in? %>
-    <%= link_to 'ホーム', new_user_session_path %>
-    <p>こんにちは、<%= link_to current_user.name, users_show_path %></p>
-    <br>
-  <% else %>
-    <%= link_to 'ホーム', destroy_user_session_path, method: :delete %>
-    <%= link_to "サインイン", new_user_session_path %>
-    <%= link_to "ユーザー登録", new_user_registration_path %>
-    <hr></hr>
-    <h1>Home Page</h1>
-  <% end %>
-  <%= yield %>
-</body>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-toggler navbar-dark bg-primary">
+      <%= link_to "Book Review", root_path, class: "nav-link navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <%= link_to "Home", root_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Book", books_path, class: "nav-link" %>
+          </li>
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= current_user.name %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to "Profile" , users_show_path, class: "dropdown-item"%>
+                <div class="dropdown-divider"></div>
+                <%= link_to "Sign out" , destroy_user_session_path, method: :delete, class: "dropdown-item"%>
+              </div>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Sign in", new_user_session_path, class: "nav-link"%>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
 </html>

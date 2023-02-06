@@ -1,35 +1,39 @@
-<%= form_with(model: book) do |form| %>
-  <% if book.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
-
-      <ul>
-        <% book.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="card col-sm-6 mx-auto mt-5">
+  <div class="card-body">
+    <h3 class="mt-1 mb-3">新しい本の追加</h3>
+    <%= form_with(model: book, local: true) do |form| %>
+    <% if book.errors.any? %>
+      <div id="error_explanation">　
+        <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
+        <ul>
+          <% book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= form.label :title, "本のタイトル", :class => "form-label" %>
+      <%= form.text_field :title, :class => "form-control" %>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
+    <div class="field">
+      <%= form.label :number_of_pages, "ページ数", :class => "form-label" %>
+      <%= form.number_field :number_of_pages, :class => "form-control" %>
+    </div>
 
-  <div>
-    <%= form.label :number_of_pages, style: "display: block" %>
-    <%= form.number_field :number_of_pages %>
-  </div>
-  
-  <div class="field">
-    <%= form.label :detail %>
-    <%= form.text_field :detail %>
-  </div>
+    <div class="field">
+      <%= form.label :detail, "本の内容", :class => "form-label"  %>
+      <%= form.text_area :detail, :class => "form-control"%>
+    </div>
 
-  <div class="field">
-    <%= form.label :image, style: "display: block" %>
-    <%= form.file_field :image %>
-  <div>
-    <%= form.submit %>
+    <div class="field">
+      <%= form.label :image, "本"  %>
+      <%= form.file_field :image %><br>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+    <% end %>
   </div>
-<% end %>
