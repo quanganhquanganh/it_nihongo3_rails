@@ -8,6 +8,16 @@
   <% end %>
 </p>
 
+<h2>Review List</h2>
+<ul>
+    <% @book.book_review.each do |book_review| %>
+    <li>
+        <%= book_review.review %>
+        (<i><%= book_review.user.name if book_review.user%></i>)
+    </li>
+    <% end %>
+</ul>
+
 <div>
   <%= link_to "Edit this book", edit_book_path(@book) %> |
   <%= link_to "Back to books", books_path %>
